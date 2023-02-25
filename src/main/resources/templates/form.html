@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymelraf.org">
+  <head th:replace="layout/layout :: head">
+  </head>
+ <link rel="stylesheet" th:href="@{/css/styles.css}"/>   
+
+    <body>
+        <nav th:replace="layout/layout ::header"></nav>
+           
+    <div class="container" id="advanced-search-form">
+        <div th:object="${dataCliente}" th:remove="tag" >
+            <ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger ">
+                <li th:each="err: ${#fields.errors('*')}" th:text="${err}" class="m-2"></li>
+            </ul>
+        </div>
+        <h2 th:text="${title}">Advanced Search</h2>
+        <form th:action="@{/form}" th:Object="${dataCliente}" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="first-name">Nombre</label>
+                <input type="text" class="form-control" placeholder="Nombre..." id="nombre" th:field="*{nombre}">
+                <small th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="error"></small>
+            </div>
+            <div class="form-group">
+                <label for="last-name">Apellido</label>
+                <input type="text" class="form-control" placeholder="Apellido..." id="apellido" th:field="*{apellido}">
+                <small th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}" class="error"></small>
+            </div>
+           
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" class="form-control" placeholder="Email..." id="email" th:field="*{email}">
+                <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error"></small>
+            </div>
+             <div class="form-group">
+                <label for="createAt">Fecha Creacion</label>
+                <input type="text" class="form-control"  id="createAt" th:field="*{createAt}">
+                 <small th:if="${#fields.hasErrors('createAt')}" th:errors="*{createAt}" class="error"></small>
+            </div>
+            <!--div class="form-group">
+                <label for="foto">Foto</label>
+                <input type="file" class="form-control" name="file"  th:field="*{foto}">
+                <small th:if="${#fields.hasErrors('foto')}" th:errors="*{foto}" class="error"></small>
+            </div-->
+            <div class="form-group">
+                <label for="file">Foto</label>
+                <input type="file" class="form-control" name="file" >
+            </div>
+            <!--input type="hidden" th:field="*{id}"-->
+            <div class="clearfix"></div>
+            <button type="submit" class="btn btn-primary btn-lg btn-responsive" id="search"> <span class="glyphicon glyphicon-search"></span> Guardar</button>
+        </form>
+   
+    </div><br><br>
+     <footer th:replace="layout/layout :: footer">></footer>  
+    </body>
+</html>

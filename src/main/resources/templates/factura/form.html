@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymelraf.org">
+  <head th:replace="layout/layout :: head">
+  </head>
+  <link rel="stylesheet" th:href="@{/css/styles.css}"/> 
+  <link rel="stylesheet" th:href="@{/css/centrar.css}"/>   
+
+    <body>
+        <nav th:replace="layout/layout ::header"></nav>
+           
+    <div class="container" id="advanced-search-form">       
+        <h2 th:text="${title}">Advanced Search</h2>
+        <form th:action="@{/facturas/ep0dofesk/form}" th:Object="${factura}" method="post">
+            <section class="columna">
+            <div class="form-group">
+                <label for="first-name">Descripcion</label>
+                <input type="text" class="fo" placeholder="..." id="descripcion" th:field="*{descripcion}" th:errorclass="'form-control is-invalid'">
+                <small th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}" class="error"></small>
+            </div>
+            <div class="form-group">
+                <label for="last-name">Observaciones</label>
+                <textarea type="text" class="fo" placeholder="..." id="observaciones" th:field="*{observaciones}" 
+th:errorclass="'form-control is-invalid'"></textarea>
+                <small th:if="${#fields.hasErrors('observaciones')}" th:errors="*{observaciones}" class="error"></small>
+            </div>
+                <div class="form-group">
+                    <label for="buscar_dato">Buscar Dato</label>
+                    <input type="text" class="fo" placeholder="..." id="buscar_dato" >
+                    <!--small th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="error"></small-->
+                </div>
+           </section> 
+            <table th:replace="factura/plantillaItems :: itemsFactura"></table>
+            <table id="cargarItemProductos" class="table table-sm table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                        <th>Total</th>
+                        <th>Delete</th>
+                    </tr> 
+                </thead>
+                <tbody></tbody>
+            </table>
+            <h5><span class="badge badge-secondary" id="g_total">0</span></h5>
+            <button type="submit" class="btn btn-primary btn-lg btn-responsive" id="search">  <span class="glyphicon glyphicon-search" >Guardar</span></button>
+            <a th:href="@{'/showdetails'+'/'+ ${factura.cliente.id}}" class="btn  btn-lg btn-responsive"  style="width: 80px; background: #4DEFEF;"id="search">  <span class="glyphicon glyphicon-search" >volver</span></a>
+        </form>
+        
+   
+    </div><br><br>
+     <footer th:replace="layout/layout :: footer"></footer>  
+    
+     <script th:replace="factura/js/auto-complete :: javascript"></script>
+     
+    </body>
+</html>

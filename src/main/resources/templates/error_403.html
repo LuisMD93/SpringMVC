@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymelraf.org">
+  <head th:replace="layout/layout :: head">
+  </head>
+  
+    <body>
+        <div class="container"style="margin-top: 30px; background: red; color:white;">
+            <div class="card" style="background: red;">
+                <div class="card-header">
+                    <b>Acceso Denegado!</b>
+                </div>
+                <div class="card-body">                
+                    <p class="card-text"><h5>Lo sentimos: <span th:text="${#httpServletRequest.remoteUser}">No tiene permisos</span></h5>No cuentas con los permisos necesarios para poder realizar dicha accion</p>
+                    <a th:href="@{/}" class="btn btn-outline-dark">Back</a>
+                </div>
+            </div>
+        </div>
+     <footer th:replace="layout/layout :: footer"></footer>  
+     <script th:replace="factura/js/auto-complete :: javascript"></script>
+     
+    </body>
+</html>
